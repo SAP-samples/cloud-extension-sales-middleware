@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c4c-events-consumer
+  labels:
+    app: c4c-events-consumer
+    version: v1
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: c4c-events-consumer
+      version: v1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  template:
+    metadata:
+      labels:
+        app: c4c-events-consumer
+        version: v1
+
+    spec:
+      imagePullSecrets:
+        - name: regsecret
+
+
+      containers:
+      - name: c4c-events-consumer
+        image: ticid.docker.repositories.sap.ondemand.com/us/c4c-events-consumer:0.0.19
+        imagePullPolicy: Always
+
+        env:
+        - name: PORT
+          value: "8080"
+        - name: ENABLE_CACHING
+          value: "true"
+        - name: redis_host
+          value: redis-master.default.svc.cluster.local
+        - name: redis_port
+          value: "6379"
+        - name: redis_password
+          valueFrom:
+            secretKeyRef:
+              name: sales-middleware-secret
+              key: REDIS_PASSWORD
+
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+            name: http
+
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "1024Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1024Mi"
+
+        readinessProbe:
+          failureThreshold: 2
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          timeoutSeconds: 8
+
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          timeoutSeconds: 8
+
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+

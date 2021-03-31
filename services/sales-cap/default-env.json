@@ -1,0 +1,42 @@
+{
+  "cds": {
+    "requires": {
+      "activity": {
+        "kind": "odata",
+        "model": "srv\\external\\activity",
+        "credentials": {
+          "destination": "c4c-service",
+          "path": "/odata/v1/c4codataapi",
+          "requestTimeout": 300000000
+        }
+      },
+      "contact": {
+        "kind": "odata",
+        "model": "srv\\external\\contact",
+        "credentials": {
+          "destination": "c4c-service",
+          "path": "/odata/v1/c4codataapi",
+          "requestTimeout": 300000000
+        }
+      },
+      "identity": {
+        "kind": "odata",
+        "model": "srv\\external\\identity",
+        "credentials": {
+          "destination": "c4c-service",
+          "path": "/odata/v1/c4codataapi",
+          "requestTimeout": 300000000
+        }
+      },
+      "businessuser": {
+        "kind": "odata",
+        "model": "srv\\external\\businessuser",
+        "credentials": {
+          "destination": "c4c-service",
+          "path": "/odata/v1/c4codataapi",
+          "requestTimeout": 300000000
+        }
+      }
+    }
+  }
+}

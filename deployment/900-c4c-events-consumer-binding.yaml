@@ -1,0 +1,61 @@
+#apiVersion: servicecatalog.k8s.io/v1beta1
+#kind: ServiceBinding
+#metadata:
+#  name: c4c-sales-middleware-binding
+#  labels:
+#    app: sales-middleware
+#spec:
+#  instanceRef:
+#    name: mp-sap-cloud-for-customer-test
+#---
+#apiVersion: servicecatalog.kyma-project.io/v1alpha1
+#kind: ServiceBindingUsage
+#metadata:
+#  name: c4c-sales-middleware-binding-usage
+#  labels:
+#    app: sales-middleware
+#spec:
+#  parameters:
+#    envPrefix:
+#      name: C4C_
+#  serviceBindingRef:
+#    name: c4c-sales-middleware-binding
+#  usedBy:
+#    kind: deployment
+#    name: c4c-events-consumer
+#---
+#apiVersion: eventing.knative.dev/v1alpha1
+#kind: Trigger
+#metadata:
+#  name: c4c-sales-middleware-trigger
+#spec:
+#  broker: default
+#  filter:
+#    attributes:
+#      eventtypeversion: v1
+##      source: mp-tfe-sales-cloud
+##      type: Visit.WorklistItem.Created
+#  subscriber:
+#    ref:
+#      apiVersion: v1
+#      kind: Service
+#      name: c4c-events-consumer
+
+#---
+#apiVersion: eventing.knative.dev/v1alpha1
+#kind: Trigger
+#metadata:
+#  generation: 1
+#  labels:
+#    eventing.knative.dev/broker: default
+#  name: c4c-sales-middleware-trigger
+#  namespace: default
+#spec:
+#  broker: default
+#  filter:
+#    attributes:
+#      eventtypeversion: v1
+#      source: mp-tfe-sales-cloud
+##      type: Visit.WorklistItem.Created
+#  subscriber:
+#    uri: http://c4c-events-consumer.default.svc.cluster.local

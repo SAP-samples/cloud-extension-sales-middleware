@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c4c-events-consumer
+  labels:
+    app: c4c-events-consumer
+    version: v1
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: c4c-events-consumer
+      version: v1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  template:
+    metadata:
+      labels:
+        app: c4c-events-consumer
+        version: v1
+
+    spec:
+      imagePullSecrets:
+        - name: regsecret
+
+
+      containers:
+      - name: c4c-events-consumer
+        image: ticid.docker.repositories.sap.ondemand.com/us/c4c-events-consumer:0.0.19
+        imagePullPolicy: Always
+
+        env:
+        - name: PORT
+          value: "8080"
+        - name: ENABLE_CACHING
+          value: "true"
+
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+            name: http
+
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "100Mi"
+          limits:
+            cpu: "2000m"
+            memory: "100Mi"
+
+        readinessProbe:
+          failureThreshold: 2
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          timeoutSeconds: 8
+
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          timeoutSeconds: 8
+
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+

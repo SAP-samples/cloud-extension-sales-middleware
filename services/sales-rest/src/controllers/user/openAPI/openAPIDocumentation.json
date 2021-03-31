@@ -1,0 +1,1075 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.0.0",
+        "title": "Sales Middleware API",
+        "description": "Sales Middleware use case based, using SAP Sales Cloud"
+    },
+    "servers": [
+        {
+            "url": "https://sales-middleware-rest.c-416e85f.kyma.shoot.live.k8s-hana.ondemand.com/api/v1/sales",
+            "description": "Kyma Middleware DEV API server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Visits",
+            "description": "API for Visits "
+        },
+        {
+            "name": "Issues",
+            "description": "API for Issues "
+        },
+        {
+            "name": "Tasks",
+            "description": "API for Tasks "
+        },
+        {
+            "name": "Products",
+            "description": "API for Products "
+        },
+        {
+            "name": "Accounts",
+            "description": "API for Accounts "
+        },
+        {
+            "name": "Contacts",
+            "description": "API for Contacts "
+        },
+        {
+            "name": "User profile",
+            "description": "API for User profile "
+        },
+        {
+            "name": "Cache",
+            "description": "API for Cache "
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "in": "headers",
+            "name": "authorization"
+        }
+    },
+    "paths": {
+        "/visits": {
+            "get": {
+                "summary": "GET Visits",
+                "tags": [
+                    "Visits"
+                ],
+                "description": "Get Visits for a specific day. Default date is today",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "header",
+                        "required": false,
+                        "description": "Visits's owner Id",
+                        "default": "00163E8B-259B-1EDA-9E98-432D21F5D55E"
+                    },
+                    {
+                        "name": "targetDay",
+                        "description": "Visit start date",
+                        "in": "query",
+                        "type": "string",
+                        "required": false,
+                        "default": "2020-08-11T09:00+03:00"
+                    },
+                    {
+                        "name": "status",
+                        "description": "Visit Status",
+                        "in": "query",
+                        "default": "OPEN",
+                        "required": false,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/visits/{visitId}": {
+            "get": {
+                "summary": "GET Visit",
+                "tags": [
+                    "Visits"
+                ],
+                "description": "Get Visit by ID",
+                "parameters": [
+                    {
+                        "name": "visitId",
+                        "description": "Visit ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E7930751EEAB692D7CB1A4E4FEC"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/visits/{visitId}/note": {
+            "post": {
+                "summary": "Add draft to Visit",
+                "tags": [
+                    "Visits"
+                ],
+                "description": "Add a draft to a Visit",
+                "parameters": [
+                    {
+                        "name": "visitId",
+                        "description": "Visit ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E7930751EEAB692D7CB1A4E4FEC"
+                    }
+                ],
+                "requestBody": {
+                    "description": "draft note to add",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "internalNote": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "note from OpenAPI3"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully  added draft",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    "404": {
+                        "description": "BAD REQUEST"
+                    }
+                }
+            }
+        },
+        "/visits/{id}/note": {
+            "delete": {
+                "summary": "Delete Visit Note",
+                "tags": [
+                    "Visits"
+                ],
+                "description": "Delete Visit note",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Visit ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E7930751EEAB692D7CB1A4E4FEC"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Note deleted successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    "400": {
+                        "description": "BAD REQUEST"
+                    }
+                }
+            }
+        },
+        "/visits/{visitId}/status/{visitStatus}": {
+            "post": {
+                "summary": "Update Visit Status",
+                "tags": [
+                    "Visits"
+                ],
+                "description": "Add a draft to a Visit",
+                "parameters": [
+                    {
+                        "name": "visitId",
+                        "description": "Visit ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E7930751EEAB692D7CB1A4E4FEC"
+                    },
+                    {
+                        "name": "visitStatus",
+                        "description": "new visit status",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "COMPLETED"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully changed visit Status",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    "404": {
+                        "description": "BAD REQUEST"
+                    }
+                }
+            }
+        },
+        "/visits/{visitId}/note/sync": {
+            "post": {
+                "summary": "Sync Visit with ACE",
+                "tags": [
+                    "Visits"
+                ],
+                "description": "Sync Visit with ACE",
+                "parameters": [
+                    {
+                        "name": "visitId",
+                        "description": "Visit ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E7930751EEAB692D7CB1A4E4FEC"
+                    },
+                    {
+                        "name": "completeVisit",
+                        "description": "Flag: should visit be completed",
+                        "in": "query",
+                        "type": "boolean",
+                        "required": false,
+                        "default": false
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully changed visit Status",
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    "404": {
+                        "description": "BAD REQUEST"
+                    }
+                }
+            }
+        },
+        "/issues": {
+            "get": {
+                "summary": "GET Issues",
+                "tags": [
+                    "Issues"
+                ],
+                "description": "Get All Issues",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "header",
+                        "required": false,
+                        "description": "Current UserId",
+                        "default": "00163E8B-259B-1EDA-9E98-432D21F5D55E"
+                    },
+                    {
+                        "name": "status",
+                        "description": "Issue Status",
+                        "in": "query",
+                        "default": "OPEN",
+                        "required": false,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Issue"
+                        }
+                    },
+                    {
+                        "name": "account",
+                        "description": "Issue account Id",
+                        "in": "query",
+                        "default": "00163E08ABF01ED69CE6DD15F43262CD",
+                        "required": false,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Issue"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Issue"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/issues/{issueId}": {
+            "get": {
+                "summary": "GET Issue",
+                "tags": [
+                    "Issues"
+                ],
+                "description": "Get Issue by ID",
+                "parameters": [
+                    {
+                        "name": "issueId",
+                        "description": "Issue ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E78AE831EDAB6F73761574E2CFB"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Issue"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/issues/count": {
+            "get": {
+                "summary": "GET count for Issues",
+                "tags": [
+                    "Issues"
+                ],
+                "description": "Get count for Issues, by status",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Issue"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/tasks": {
+            "get": {
+                "summary": "GET Tasks",
+                "tags": [
+                    "Tasks"
+                ],
+                "description": "Get All tasks owned by the given UserId",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "header",
+                        "required": false,
+                        "description": "Current UserId",
+                        "default": "00163E8B-259B-1EDA-9E98-432D21F5D55E"
+                    },
+                    {
+                        "name": "status",
+                        "description": "Task Status",
+                        "in": "query",
+                        "default": "OPEN",
+                        "required": false,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    {
+                        "name": "account",
+                        "description": "Task account Id",
+                        "in": "query",
+                        "default": "00163E08ABF01ED69CE6DD15F43262CD",
+                        "required": false,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create new task",
+                "tags": [
+                    "Tasks"
+                ],
+                "description": "Create new task",
+                "parameters": [],
+                "requestBody": {
+                    "description": "new task payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "standalone task"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "create new task from Open API"
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "2020-06-24T09:30:00.000Z"
+                                    },
+                                    "highPriority": {
+                                        "type": "boolean",
+                                        "required": false,
+                                        "example": false
+                                    },
+                                    "contact": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "00163E08ABF01EE78DC2DD0503029384"
+                                    },
+                                    "account": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "00163E08ABF01EE78DC2918D620D5224"
+                                    },
+                                    "processor": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "00163E08ABF01EE69CEDCBE3E05D1273"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully  created  standalone task",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "404": {
+                        "description": "BAD REQUEST"
+                    }
+                }
+            }
+        },
+        "/tasks/{taskId}": {
+            "get": {
+                "summary": "GET Task",
+                "tags": [
+                    "Tasks"
+                ],
+                "description": "Get Task by ID",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "description": "Task ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E7930751EDAB68084B352C5B89E"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "summary": "GET Products",
+                "tags": [
+                    "Products"
+                ],
+                "description": "Get All Products",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/products/{productId}": {
+            "get": {
+                "summary": "GET Product",
+                "tags": [
+                    "Products"
+                ],
+                "description": "Get Product by ID",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "description": "Product ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E08ABF01ED69CE8AEA8709C8F3B"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/accounts": {
+            "get": {
+                "summary": "GET Accounts",
+                "tags": [
+                    "Accounts"
+                ],
+                "description": "Get Accounts list",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/accounts/{accountId}": {
+            "get": {
+                "summary": "GET Account",
+                "tags": [
+                    "Accounts"
+                ],
+                "description": "Get Account by ID",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "description": "Account ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E08ABF01ED69CE6DD15F43262CD"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/accounts/ratings": {
+            "get": {
+                "summary": "GET Accounts Ratings List",
+                "tags": [
+                    "Accounts"
+                ],
+                "description": "Get Accounts Ratings List",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Rating"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/contacts": {
+            "get": {
+                "summary": "GET Contacts",
+                "tags": [
+                    "Contacts"
+                ],
+                "description": "Get Contacts list",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Contact"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/contacts/{contactId}": {
+            "get": {
+                "summary": "GET Contact",
+                "tags": [
+                    "Contacts"
+                ],
+                "description": "Get Contact by ID",
+                "parameters": [
+                    {
+                        "name": "contactId",
+                        "description": "Contact ID",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "default": "00163E08ABF01EE78DC2DD0503029384"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Contact"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/user/profile": {
+            "get": {
+                "summary": "GET Current User Profile information",
+                "tags": [
+                    "User profile"
+                ],
+                "description": "GET Current User Profile information",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "header",
+                        "required": false,
+                        "description": "Current UserId",
+                        "default": "00163E8B-259B-1EDA-9E98-432D21F5D55E"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/cache": {
+            "delete": {
+                "summary": "Clear Cache",
+                "tags": [
+                    "Cache"
+                ],
+                "description": "Clear Entire Cache",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Cache"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Visit": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "accountName": {
+                    "type": "string"
+                },
+                "rate": {
+                    "type": "string"
+                },
+                "rateDescription": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "hasInternalNote": {
+                    "type": "boolean"
+                },
+                "isNoteSyncedToACE": {
+                    "type": "boolean"
+                },
+                "startDate": {
+                    "type": "string"
+                },
+                "endDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "Issue": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "orderNumber": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "creationDate": {
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string"
+                },
+                "expectedDate": {
+                    "type": "string"
+                },
+                "financialSize": {
+                    "type": "object"
+                },
+                "account": {
+                    "type": "object"
+                },
+                "products": {
+                    "type": "object"
+                },
+                "tasks": {
+                    "type": "object"
+                }
+            }
+        },
+        "Task": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string"
+                },
+                "dueDate": {
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string"
+                },
+                "issue": {
+                    "type": "object"
+                },
+                "primaryContact": {
+                    "type": "object"
+                }
+            }
+        },
+        "Product": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "divisionText": {
+                    "type": "string"
+                }
+            }
+        },
+        "Account": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "rate": {
+                    "type": "string"
+                },
+                "rateDescription": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "contacts": {
+                    "type": "object"
+                }
+            }
+        },
+        "Rating": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Contact": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "companyName": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "jobName": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "companyName": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "jobName": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

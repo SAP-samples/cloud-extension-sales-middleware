@@ -1,0 +1,73 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sales-middleware-config
+  namespace: default
+data:
+  destinations: |
+    [
+      {
+        "name": "c4c-service",
+        "authTokens": [],
+        "authentication": "BasicAuthentication",
+        "url": "https://<Your Sales Cloud Host Name>/sap/c4c",
+        "isTrustingAllCertificates": "true",
+        "username": "<Your Sales Cloud Username>",
+        "password": "<Your Sales Cloud Password>"
+      }
+    ]
+  VCAP_SERVICES: |
+    {
+      "destinations": [
+        {
+          "name": "c4c-service",
+          "authTokens": [],
+          "authentication": "BasicAuthentication",
+          "url": "https://<Your Sales Cloud Host Name>/sap/c4c",
+          "isTrustingAllCertificates": "true",
+          "username": "<Your Sales Cloud Username>",
+          "password": "<Your Sales Cloud Password>"
+        }
+      ]
+    }
+  cds.requires.activity: |
+    {
+      "kind": "odata",
+      "model": "srv\\external\\activity",
+      "credentials": {
+        "destination": "c4c-service",
+        "path" : "/odata/v1/c4codataapi",
+        "requestTimeout": 300000
+      }
+    }
+  cds.requires.contact: |
+    {
+      "kind": "odata",
+      "model": "srv\\external\\contact",
+      "credentials": {
+        "destination": "c4c-service",
+        "path" : "/odata/v1/c4codataapi",
+        "requestTimeout": 300000
+      }
+    }
+  cds.requires.identity: |
+    {
+      "kind": "odata",
+      "model": "srv\\external\\identity",
+      "credentials": {
+        "destination": "c4c-service",
+        "path" : "/odata/v1/c4codataapi",
+        "requestTimeout": 300000
+      }
+    }
+  cds.requires.businessuser: |
+    {
+      "kind": "odata",
+      "model": "srv\\external\\businessuser",
+      "credentials": {
+        "destination": "c4c-service",
+        "path" : "/odata/v1/c4codataapi",
+        "requestTimeout": 300000
+      }
+    }

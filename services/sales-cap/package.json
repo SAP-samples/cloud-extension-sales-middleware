@@ -1,0 +1,66 @@
+{
+  "name": "sales-middleware",
+  "version": "1.0.0",
+  "description": "Sales Middleware Use case",
+  "repository": "https://github.wdf.sap.corp/TFE/sales-middleware",
+  "license": "Apache License 2.0",
+  "scripts": {
+    "start": "npx -p @sap/cds-dk cds run --production",
+    "build": "npx -p @sap/cds-dk cds build/all --clean",
+    "openapi": "cds compile srv --service all -o docs --to openapi --openapi:diagram"
+  },
+  "engines": {
+    "node": "^12.20"
+  },
+  "author": {
+    "name": "Nicolae Nicora",
+    "email": "n.nicora@sap.com"
+  },
+  "contributors": [],
+  "dependencies": {
+    "@sap/audit-logging": "^3.1.0",
+    "@sap/cds": "^4.4.10",
+    "@sap/cds-runtime": "^2.7.10",
+    "@sap/cds-rest": "^1.6.3",
+    "@sap/hana-client": "^2.6.64",
+    "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "to-uuid": "^0.1.3",
+    "lodash": "^4.17.20",
+    "hdb": "^0.18.2",
+    "dotenv": "^8.2.0",
+    "ioredis": "^4.19.4",
+    "cheerio": "^1.0.0-rc.3",
+    "striptags": "^3.1.1",
+    "html-entities": "^1.3.3",
+    "moment": "^2.29.1",
+    "axios": "^0.21.0",
+    "swagger-ui-express": "^4.1.6",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^3.3.2",
+    "sqlite3": "^5.0.0"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "[development]": {
+          "kind": "sqlite",
+          "credentials": {
+            "database": "db/sales.db"
+          }
+        },
+        "[production]": {
+          "kind": "hana"
+        }
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
+    "odata": {
+      "version": "v4"
+    }
+  }
+}

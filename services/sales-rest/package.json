@@ -1,0 +1,69 @@
+{
+  "name": "sales_middleware",
+  "version": "0.6.4",
+  "description": "GrACE Sales Middleware",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha test/unit --recursive --exit --timeout 10000",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src"
+  },
+  "engines": {
+    "node": "12.16.x",
+    "npm": "6.13.x"
+  },
+  "author": {
+    "name": "Florin Barbuceanu",
+    "email": "florin.barbuceanu@sap.com"
+  },
+  "contributors": [
+    {
+      "name": "Madalina Vieriu",
+      "email": "madalina.vieriu@sap.com"
+    }
+  ],
+  "dependencies": {
+    "@sap/xssec": "^3.0.9",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cf-nodejs-logging-support": "^6.2.0",
+    "cheerio": "^1.0.0-rc.3",
+    "compression": "^1.7.4",
+    "cors": "2.8.5",
+    "dotenv": "8.2.0",
+    "express": "^4.17.1",
+    "html-entities": "^1.3.1",
+    "http-status-codes": "^1.4.0",
+    "ioredis": "^4.17.3",
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
+    "mongoose": "^5.9.20",
+    "odata": "^1.1.0",
+    "ordinal": "^1.0.3",
+    "parse-fn-args": "1.0.1",
+    "passport": "^0.4.1",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "split": "1.0.1",
+    "striptags": "^3.1.1",
+    "swagger-ui-express": "^4.1.4",
+    "to-uuid": "^0.1.3",
+    "log4js": "^6.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "6.3.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.13.0",
+    "mocha": "^8.1.1",
+    "prettier": "^1.13.7",
+    "proxyquire": "^2.1.3",
+    "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0"
+  }
+}

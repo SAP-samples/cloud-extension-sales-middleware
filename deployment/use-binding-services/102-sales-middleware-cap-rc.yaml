@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sales-middleware-cap
+  labels:
+    app: sales-middleware-cap
+    version: v1
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sales-middleware-cap
+      version: v1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  template:
+    metadata:
+      labels:
+        app: sales-middleware-cap
+        version: v1
+
+    spec:
+      imagePullSecrets:
+        - name: regsecret
+
+#      volumes:
+#        - name: application-config
+#          configMap:
+#            name: sales-middleware-config
+#            items:
+#              - key: default-env.json
+#                path: default-env.json
+
+      containers:
+      - name: sales-middleware-cap
+        image: ticid.docker.repositories.sap.ondemand.com/us/sales-middleware-cap:0.0.12
+        imagePullPolicy: Always
+
+#        volumeMounts:
+#          - name: application-config
+#            mountPath: /usr/src/app
+#            readOnly: true
+        envFrom:
+          - configMapRef:
+              name: sales-middleware-config
+
+        env:
+        - name: PORT
+          value: "4004"
+        - name: ENABLE_CACHING
+          value: "true"
+
+        ports:
+          - containerPort: 4004
+            protocol: TCP
+            name: http
+
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1024Mi"
+          limits:
+            cpu: "500m"
+            memory: "1024Mi"
+
+        readinessProbe:
+          failureThreshold: 2
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          httpGet:
+            path: /healthz
+            port: 4004
+            scheme: HTTP
+          timeoutSeconds: 8
+
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          httpGet:
+            path: /healthz
+            port: 4004
+            scheme: HTTP
+          timeoutSeconds: 8
+
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+
