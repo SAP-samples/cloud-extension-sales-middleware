@@ -1,7 +1,7 @@
 # SAP Sales Cloud Extension
-Welcome to SAP Business Technology Platform "Sales Middleware" use case PoC.
+Welcome to the SAP Business Technology Platform "Sales Middleware" use case PoC.
 
-The solution designed to connect devices to Sales Cloud/Sales for Customer (C4C) by consuming/displaying
+The solution is designed to connect devices to SAP Sales Cloud/SAP Sales for Customer (C4C) by consuming/displaying
 data coming from C4C:
 * Sales Management
 * View of Monthly Sales
@@ -17,15 +17,14 @@ data coming from C4C:
 
 
 ## Design Architecture Diagrams
-Sales middleware use case running on SAP Business Technology Platform using Kyma Runtime(on top of K8S).
+The sales middleware use case runs on SAP Business Technology Platform using Kyma Runtime (on top of Kubernetes).
 
-High Level Target Design which is including mobile application being out of scope of this use case,
-but is included to show the full communication.
+Pictured here is the high-level target design - this includes the mobile application, which is out of scope for this use case, but is included to show the full communication.
 
 ![](images/HL-SalesMiddleware-UseCase.png)
 
 <br/><br/>
-Bellow there is two diagrams showing different aproaches to extend functionality of SAP Cloud Sales:
+Below there are two diagrams showing different aproaches to extend the functionality of SAP Cloud Sales:
 
 - Sales service is using CAP framework to extend the Sales Cloud API.
   Using Redis for caching.
