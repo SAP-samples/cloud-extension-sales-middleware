@@ -1,8 +1,13 @@
 # SAP Sales Cloud Extension
 Welcome to SAP Business Technology Platform "Sales Middleware" use case PoC.
 
-The solution designed to connect devices to Sales Cloud/Sales for Customer (C4C) by consuming/displaying
-data coming from C4C:
+## Description
+SAP Sales Middleware, a cloud-based solution, being an extension of SAP Sales Cloud, 
+running on <b>SAP Business Technology Platform</b> using <b>Kyma Runtime</b> and powered by Kyma Serverless and Event-Driven Communication. 
+This app, provides asset-intensive with a data-driven operating model based on real-time visibility across the 
+enterprise while addressing key challenges associated with sales management, compliance, and productivity.
+
+These are a few out of many other functionalities with which can be extended:
 * Sales Management
 * View of Monthly Sales
 * View of Quarterly Sales
@@ -17,7 +22,7 @@ data coming from C4C:
 
 
 ## Design Architecture Diagrams
-Sales middleware use case running on SAP Business Technology Platform using Kyma Runtime(on top of K8S).
+Sales middleware use case running on SAP Business Technology Platform using Kyma Runtime.
 
 High Level Target Design which is including mobile application being out of scope of this use case,
 but is included to show the full communication.
@@ -25,7 +30,7 @@ but is included to show the full communication.
 ![](images/HL-SalesMiddleware-UseCase.png)
 
 <br/><br/>
-Bellow there is two diagrams showing different aproaches to extend functionality of SAP Cloud Sales:
+Bellow there are two diagrams showing different approaches to extend functionality of SAP Cloud Sales:
 
 - Sales service is using CAP framework to extend the Sales Cloud API.
   Using Redis for caching.
@@ -47,11 +52,13 @@ No known issues at this moment.
 
 ## How to obtain support
 
-[Create an issue](https://github.com/SAP-samples/cloud-extension-sales-middleware/issues) in this repository if you find a bug or have questions about the content.
+[Create an issue](https://github.com/SAP-samples/cloud-extension-sales-middleware/issues) in this repository if you find
+a bug or have questions about the content.
 
 ## Contributing
 In case if you want to add some changes then your contributions will be welcome in the form of pull requests (PRs) - 
 please submit in the normal way. Thank you!
 
 ## License
-Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
+Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the 
+Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
