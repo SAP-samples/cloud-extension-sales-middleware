@@ -22,7 +22,7 @@ These are a few out of many other functionalities with which can be extended:
 
 
 ## Design Architecture Diagrams
-The sales middleware use case runs on SAP Business Technology Platform using Kyma Runtime (on top of Kubernetes).
+The sales middleware use case runs on SAP Business Technology Platform using Kyma Runtime.
 
 Pictured here is the high-level target design - this includes the mobile application, which is out of scope for this use case, but is included to show the full communication.
 
