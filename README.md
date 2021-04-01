@@ -1,5 +1,5 @@
 # SAP Sales Cloud Extension
-Welcome to SAP Business Technology Platform "Sales Middleware" use case PoC.
+Welcome to the SAP Business Technology Platform "Sales Middleware" use case PoC.
 
 ## Description
 SAP Sales Middleware, a cloud-based solution, being an extension of SAP Sales Cloud, 
@@ -22,15 +22,14 @@ These are a few out of many other functionalities with which can be extended:
 
 
 ## Design Architecture Diagrams
-Sales middleware use case running on SAP Business Technology Platform using Kyma Runtime.
+The sales middleware use case runs on SAP Business Technology Platform using Kyma Runtime (on top of Kubernetes).
 
-High Level Target Design which is including mobile application being out of scope of this use case,
-but is included to show the full communication.
+Pictured here is the high-level target design - this includes the mobile application, which is out of scope for this use case, but is included to show the full communication.
 
 ![](images/HL-SalesMiddleware-UseCase.png)
 
 <br/><br/>
-Bellow there are two diagrams showing different approaches to extend functionality of SAP Cloud Sales:
+Below there are two diagrams showing different approaches to extend the functionality of SAP Cloud Sales:
 
 - Sales service is using CAP framework to extend the Sales Cloud API.
   Using Redis for caching.
