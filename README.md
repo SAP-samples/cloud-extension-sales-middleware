@@ -1,4 +1,4 @@
-<!-- Add badge when registered [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/cloud-extension-sales-middleware)](https://api.reuse.software/info/github.com/SAP-samples/cloud-extension-sales-middleware) -->
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/cloud-extension-sales-middleware)](https://api.reuse.software/info/github.com/SAP-samples/cloud-extension-sales-middleware)
 
 # SAP Sales Cloud Extension
 Welcome to the SAP Business Technology Platform "Sales Middleware" use case PoC.
