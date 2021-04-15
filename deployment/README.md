@@ -23,16 +23,16 @@ kubect apply -f ./prep/
 ```
 
 ### Caching - Redis
-There are multiple ways to have a Redis, for production should be used 1 solution.
+There are multiple ways to implement Redis. For production, use the first option below.
 <ol>
 <li>
-Use Azure(Azure Redis Cache) / AWS(ElastiCache for Redis) / GCP(Memorystore for Redis) by creating an instance of from Service Catalog - Add-Ons.
+Use Azure (Azure Redis Cache) / AWS (ElastiCache for Redis) / GCP (Memorystore for Redis) by creating an instance from Service Catalog - Add-Ons.
 Bind created Redis service instance to already existent <code>sales-middleware-cap</code> and <code>c4c-events-consumer</code> 
 deployments / k8s apps, see bellow how to deploy the components, using <code>redis_</code> prefix.
 </li>
 
 <li>
-Temporary in memory (without persistence) only statefull service Redis on K8S cluster
+Temporary in memory (without persistence) only stateful service Redis on K8S cluster
 
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -43,16 +43,16 @@ helm install bitnami/redis --values statefull/values-redis.yaml --namespace defa
 </ol>
 
 ### Database - MongoDB
-There are multiple ways to have a MongoDB, for production should be used 1 solution.
+There are multiple ways to implement MongoDB. For production, use the first option below.
 <ol>
 <li>
-Use Azure(Azure CosmosDB) by creating an instance of from Service Catalog - Add-Ons.
+Use Azure (Azure CosmosDB) by creating an instance of from Service Catalog - Add-Ons.
 Bind created MongoDB service instance to already existent <code>sales-middleware-rest</code> 
-deployments / k8s apps, see bellow how to deploy the components, using <code>mongodb_</code> prefix.
+deployments / k8s apps, see below how to deploy the components, using <code>mongodb_</code> prefix.
 </li>
 
 <li>
-Temporary in memory (without persistence) only statefull service MongoDB on K8S cluster
+Temporary in memory (without persistence) only stateful service MongoDB on K8S cluster
 
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -72,7 +72,7 @@ kubect apply -f ./100-sales-middleware-sec.yaml
 kubect apply -f ./101-sales-middleware-conf.yaml
 ```
 
-For service <code>c4c-events-consumer</code> function service consuming services C4C.
+For service <code>c4c-events-consumer</code> function consuming SAP Sales Cloud services.
 ```sh
 kubect apply -f ./200-c4c-events-consumer-sec.yaml
 
@@ -85,13 +85,13 @@ kubect apply -f ./use-binding-services/201-c4c-events-consumer-rc.yaml
 kubect apply -f ./202-c4c-events-consumer-svc.yaml
 ```
 
-For service <code>sales-middleware-cap</code> using CAP framework to extent Sales Cloud(C4C) API
+For service <code>sales-middleware-cap</code> using CAP framework to extend SAP Sales Cloud (C4C) API
 ```sh
 
 # When redis is installed as stateful service, use for development.
 kubect apply -f ./102-sales-middleware-cap-statefull-redis-rc.yaml
 
-# When redis will be bind-ed to app, using SCP, must be used for production.
+# When redis will be bound to app, using BTP. Must be used for production.
 kubect apply -f ./use-binding-services/102-sales-middleware-cap-rc.yaml
 
 kubect apply -f ./103-sales-middleware-cap-svc.yaml
@@ -103,7 +103,7 @@ For service <code>sales-middleware-rest</code> using pure rest to query Sales Cl
 # When redis is installed as stateful service use this:
 kubect apply -f ./102-sales-middleware-rest-statefull-redis-rc.yaml
 
-# When redis will be bind-ed to app using SCP:
+# When redis will be bound to app using BTP:
 kubect apply -f ./use-binding-services/102-sales-middleware-rest-rc.yaml
 
 kubect apply -f ./103-sales-middleware-rest-svc.yaml
