@@ -4,43 +4,33 @@
 Welcome to the SAP Business Technology Platform "Sales Middleware" use case PoC.
 
 ## Description
-SAP Sales Middleware, a cloud-based solution, being an extension of SAP Sales Cloud, 
-running on <b>SAP Business Technology Platform</b> using <b>Kyma Runtime</b> and powered by Kyma Serverless and Event-Driven Communication. 
-This app, provides asset-intensive with a data-driven operating model based on real-time visibility across the 
-enterprise while addressing key challenges associated with sales management, compliance, and productivity.
+SAP Sales Middleware, a cloud-based solution, is an extension of SAP Sales Cloud, 
+running on the <b>SAP Business Technology Platform</b>. It uses <b>SAP Kyma Runtime</b> and is powered by Kyma serverless functions and event-based communication. 
+This repo contains code examples to help you implement a data-driven operating model, providing real-time visibility into sales management, compliance, and productivity.
 
-These are a few out of many other functionalities with which can be extended:
+Sales and marketing processes frequently require customization to the unique business problems facing customers from different industries and regions. Some example processes that might need extending:
+
 * Sales Management
-* View of Monthly Sales
-* View of Quarterly Sales
-* Issue Management
-    * Swipe Actions to quickly hide an Issue
-    * Escalating an issue
-* Tasks Management
-    * Create a new Task for myself from scratch
-    * Detail Page of an Issue with a Task created
-* Visits Management
-* ...
-
+* View of Monthly/Quarterly Sales
+* Issue and Escalation Management
+* Task and workflow management
 
 ## Design Architecture Diagrams
-The sales middleware use case runs on SAP Business Technology Platform using Kyma Runtime.
+The sales middleware use case runs on SAP Business Technology Platform, Kyma Runtime.
 
-Pictured here is the high-level target design - this includes the mobile application, which is out of scope for this use case, but is included to show the full communication.
+Pictured here is the high-level target design - this includes a mobile application, which is out of scope for this use case, but is included to show the complete process.
 
 ![](images/HL-SalesMiddleware-UseCase.png)
 
 <br/><br/>
-Below there are two diagrams showing different approaches to extend the functionality of SAP Cloud Sales:
+Below there are two diagrams showing different approaches to extend the functionality of SAP Sales Cloud:
 
-- Sales service is using CAP framework to extend the Sales Cloud API.
-  Using Redis for caching.
+- The Sales Middleware service uses the CAP framework to extend the SAP Sales Cloud API and uses Redis for caching.
   
   ![](images/SalesMiddleware-CAP-UseCase.png)
   
-- Sales service communication is build pure REST call to Sales Cloud.
-  As well is having integration with MongoDB to keep some entities for longer period,
-  and Redis for temporary caching.
+- Sales Middleware service communication is built using pure REST calls to SAP Sales Cloud. It also integrates with MongoDB to store some entities for a longer period, and utilizes Redis for temporary caching.
+
   ![](images/SalesMiddleware-Rest-UseCase.png)
 
 ## Guidelines
@@ -57,7 +47,7 @@ No known issues at this moment.
 a bug or have questions about the content.
 
 ## Contributing
-In case if you want to add some changes then your contributions will be welcome in the form of pull requests (PRs) - 
+In case you want to add some changes then your contributions are welcome in the form of pull requests (PRs) - 
 please submit in the normal way. Thank you!
 
 ## License
