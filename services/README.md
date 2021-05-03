@@ -232,7 +232,7 @@ First, open the <code>Dependencies</code> tab and add:
 Then go back to the <code>Source</code> tab and start with
 ```javascript
 const axios = require("axios");
-const baseURL = `${process.env['SAP_SALES_CLOUD_***_GATEWAY_URL']}`; // this is where you need your GATEWAY_URL
+const baseURL = `${process.env['SAP_SALES_CLOUD_***_TARGET_URL']}`; // this is where you need your TARGET_URL
 ```
 
 Afterward, replace the previous Kyma Function code with the following to catch the address of the account and post it to the logs:
