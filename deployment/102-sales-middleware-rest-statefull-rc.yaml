@@ -64,7 +64,7 @@ spec:
               name: sales-middleware-secret
               key: REDIS_PASSWORD
         - name: mongo_connectionString
-          value: "mongodb://mongodb.default.svc.cluster.local:27017/sales"
+          value: "mongodb://sales:63db9252ee7067606ed0fb0d0efaa1460e7241fa770405d7a629dd72419dc4c7@mongodb.default.svc.cluster.local:27017/sales"
 
         ports:
           - containerPort: 4004
