@@ -1,7 +1,7 @@
 {
   "name": "sales_middleware",
-  "version": "0.6.4",
-  "description": "GrACE Sales Middleware",
+  "version": "1.0.0",
+  "description": "Sales Middleware",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -14,14 +14,11 @@
     "npm": "6.13.x"
   },
   "author": {
-    "name": "Florin Barbuceanu",
-    "email": "florin.barbuceanu@sap.com"
+    "name": "Nicolae Nicora",
+    "email": "nicolae.nicora@sap.com"
   },
   "contributors": [
-    {
-      "name": "Madalina Vieriu",
-      "email": "madalina.vieriu@sap.com"
-    }
+
   ],
   "dependencies": {
     "@sap/xssec": "^3.0.9",
