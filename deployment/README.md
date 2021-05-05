@@ -79,7 +79,7 @@ kubect apply -f ./200-c4c-events-consumer-sec.yaml
 # When redis is installed as stateful service, use for development.
 kubect apply -f ./201-c4c-events-consumer-statefull-redis-rc.yaml
 
-# When redis will be bind-ed to app, from SCP, must be used for production.
+# When redis will be bind-ed to app, from BTP, must be used for production.
 kubect apply -f ./use-binding-services/201-c4c-events-consumer-rc.yaml
 
 kubect apply -f ./202-c4c-events-consumer-svc.yaml

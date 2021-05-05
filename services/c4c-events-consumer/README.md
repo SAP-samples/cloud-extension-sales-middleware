@@ -2,7 +2,7 @@
 Is a Kyma serverless function using [CloudEvents](https://cloudevents.io/) to receive events over
 [KNative](https://knative.dev/docs/eventing/) Message Broker (Kafka or Nats).
 All these technologies are part of Kyma, so no integration of mention tech required.
-AS current function is processing events coming from Sales for Customer(C4C) system.
+AS current function is processing events coming from SAP Sales Cloud(C4C) system.
 
 
 ## Local Starting

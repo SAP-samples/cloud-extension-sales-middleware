@@ -11,7 +11,7 @@ An SAP Sales Cloud tenant is required as well.
 ![Image](../images/SCP-KymaRuntime.png)
 
 ### Enablement of Sales Cloud (C4C) on SAP Business Technology Platform
-These are the step to set up Sales Cloud/Cloud for Customer catalog service on BTP.
+These are the step to set up SAP Sales Cloud/Cloud for Customer catalog service on BTP.
 
 On SAP Business Technology Platform Cockpit under global account.
 
@@ -27,9 +27,9 @@ On SAP Business Technology Platform Cockpit under global account.
   
   ![Image](../images/RegisterSystem-5.png)
 
-### Setup Sales Cloud (C4C) System
+### Setup SAP Sales Cloud (C4C) System
 
-Login into Sales Cloud/Sales for Customer(C4C) portal using admin user and password,
+Login into SAP Sales Cloud/Sales for Customer(C4C) portal using admin user and password,
 by using a similar URL <i>https://myXXXXXX.crm.ondemand.com </i>.
 
 <u>Navigate under <code>Administrator -> General Settings -> Communication Systems</code>.</u>
@@ -84,7 +84,7 @@ Now you should be able to see the created arrangements on the list.
 On the opened tab under <code>All Consumers</code> click the <code>Add</code> button from the top right.
 
 - For the field <code>Type</code> select <code>SAP Cloud Platform Extensions</code>. Give a convinient for you name, used <code>SALES_MIDDLEWARE_DEMO_KYMA</code>.
-- For the field <code>Remote Environment URL</code> go to SCP Cockpit and take the token url. Copy the generated url token by click the key on registered early by you system.
+- For the field <code>Remote Environment URL</code> go to BTP Cockpit and take the token url. Copy the generated url token by click the key on registered early by you system.
   
   ![Image](../images/RegisterSystem-3.png)
   
@@ -109,7 +109,7 @@ On the opened tab under <code>All Consumers</code> click the <code>Add</code> bu
 
   ![Image](../images/C4C-10.png)
 
-After these steps on SCP <code>System Landscape -> Systems</code>, the registered system should be in <code>Registered</code> state.
+After these steps on BTP <code>System Landscape -> Systems</code>, the registered system should be in <code>Registered</code> state.
 
 ![Image](../images/RegisterSystem-6.png)
     
