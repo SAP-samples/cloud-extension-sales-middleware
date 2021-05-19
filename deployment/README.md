@@ -39,7 +39,7 @@ Temporary in memory (without persistence) only stateful service Redis on K8S clu
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install bitnami/redis --values statefull/values-redis.yaml --namespace default --name-template redis
+helm install bitnami/redis --values external-statefull/values-redis.yaml --namespace default --name-template redis
 ```
 </li>
 </ol>
@@ -59,7 +59,7 @@ Temporary in memory (without persistence) only stateful service MongoDB on K8S c
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install bitnami/mongodb --values statefull/values-mongodb.yaml --namespace default --name-template mongodb
+helm install bitnami/mongodb --values external-statefull/values-mongodb.yaml --namespace default --name-template mongodb
 ```
 </li>
 </ol>
