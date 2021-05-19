@@ -65,6 +65,12 @@ helm install bitnami/mongodb --values statefull/values-mongodb.yaml --namespace 
 
 
 ### Services
+Modify the content of file <code>101-sales-middleware-conf.yaml</code> by replacing the following:
+```sh
+  <Your Sales Cloud Host Name> - Replace with SAP Sales Cloud domain instance name
+  <Your Sales Cloud Username> - Replace with SAP Sales Cloud technical username 
+  <Your Sales Cloud Password> - Replace with SAP Sales Cloud technical user password 
+```
 Install K8S <code>sales middleware</code> service.
 
 ```sh
