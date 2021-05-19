@@ -3,7 +3,8 @@
 - Make sure that you have kubectl available on your machine
 - Make sure that KUBECONFIG environment variable is pointing to K8S configuration file, which can be downloaded
   from Kyma Console/Cockpit, see the screenshot <code>Get Kubeconfig</code>:
-  ![img.png](images/Kyma-8.png)
+  
+  ![img.png](../images/Kyma-8.png)
 
 ### Preparation
 
@@ -12,13 +13,14 @@ For deployment K8S manifest files can be found on sales middleware
 
 Clone the repository:
 ```sh
-git clone https://github.com/SAP-samples/cloud-extension-sales-middlewaree.git
+git clone https://github.com/SAP-samples/cloud-extension-sales-middleware.git
 
 cd cloud-extension-sales-middleware
 ```
 
 Apply Secrets for Docker Images Repo, will be used to get the images of use case modules.
 ```sh
+cd deployment
 kubect apply -f ./prep/
 ```
 
