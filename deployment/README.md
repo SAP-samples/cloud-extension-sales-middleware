@@ -21,7 +21,7 @@ cd cloud-extension-sales-middleware
 Apply Secrets for Docker Images Repo, will be used to get the images of use case modules.
 ```sh
 cd deployment
-kubect apply -f ./prep/
+kubectl apply -f ./prep/
 ```
 
 ### Caching - Redis
@@ -76,43 +76,43 @@ Modify the content of file <code>101-sales-middleware-conf.yaml</code> by replac
 Install K8S <code>sales middleware</code> service.
 
 ```sh
-kubect apply -f ./100-sales-middleware-sec.yaml
-kubect apply -f ./101-sales-middleware-conf.yaml
+kubectl apply -f ./100-sales-middleware-sec.yaml
+kubectl apply -f ./101-sales-middleware-conf.yaml
 ```
 
 For service <code>c4c-events-consumer</code> function consuming SAP Sales Cloud services.
 ```sh
-kubect apply -f ./200-c4c-events-consumer-sec.yaml
+kubectl apply -f ./200-c4c-events-consumer-sec.yaml
 
 # When redis is installed as stateful service, use for development.
-kubect apply -f ./201-c4c-events-consumer-statefull-redis-rc.yaml
+kubectl apply -f ./201-c4c-events-consumer-statefull-redis-rc.yaml
 
 # When redis will be bind-ed to app, from BTP, must be used for production.
-kubect apply -f ./use-binding-services/201-c4c-events-consumer-rc.yaml
+kubectl apply -f ./use-binding-services/201-c4c-events-consumer-rc.yaml
 
-kubect apply -f ./202-c4c-events-consumer-svc.yaml
+kubectl apply -f ./202-c4c-events-consumer-svc.yaml
 ```
 
 For service <code>sales-middleware-cap</code> using CAP framework to extend SAP Sales Cloud (C4C) API
 ```sh
 
 # When redis is installed as stateful service, use for development.
-kubect apply -f ./102-sales-middleware-cap-statefull-redis-rc.yaml
+kubectl apply -f ./102-sales-middleware-cap-statefull-redis-rc.yaml
 
 # When redis will be bound to app, using BTP. Must be used for production.
-kubect apply -f ./use-binding-services/102-sales-middleware-cap-rc.yaml
+kubectl apply -f ./use-binding-services/102-sales-middleware-cap-rc.yaml
 
-kubect apply -f ./103-sales-middleware-cap-svc.yaml
+kubectl apply -f ./103-sales-middleware-cap-svc.yaml
 ```
 
 For service <code>sales-middleware-rest</code> using pure rest to query Sales Cloud(C4C) API
 ```sh
 
 # When redis is installed as stateful service use this:
-kubect apply -f ./102-sales-middleware-rest-statefull-redis-rc.yaml
+kubectl apply -f ./102-sales-middleware-rest-statefull-redis-rc.yaml
 
 # When redis will be bound to app using BTP:
-kubect apply -f ./use-binding-services/102-sales-middleware-rest-rc.yaml
+kubectl apply -f ./use-binding-services/102-sales-middleware-rest-rc.yaml
 
-kubect apply -f ./103-sales-middleware-rest-svc.yaml
+kubectl apply -f ./103-sales-middleware-rest-svc.yaml
 ```
